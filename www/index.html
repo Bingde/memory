@@ -50,15 +50,37 @@
  var defaultOptions = {
     bannerId: admobid.banner,
     interstitialId: admobid.interstitial,
-    adSize: 'SMART_BANNER',
-    width: '70', // valid when set adSize 'CUSTOM'
-    height: '40', // valid when set adSize 'CUSTOM'
+    adSize: 'CUSTOM',
+    //width: '70', // valid when set adSize 'CUSTOM'
+    //height: '40', // valid when set adSize 'CUSTOM'
     position: 'AdMob.AD_POSITION.TOP_CENTER',
     x: 0,       // valid when set position to POS_XY
     y: 0,       // valid when set position to POS_XY
     isTesting: false,
     autoShow: true
 	}
+	set options:
+ {
+    adSize: 'CUSTOM',	// banner type size
+   width: 30,	// banner width, if set adSize to 'CUSTOM'
+   height: 80,	// banner height, if set adSize to 'CUSTOM'
+  // position: integer, // default position
+    // x: integer,	// default X of banner
+ //  y: integer,	// default Y of banner
+    isTesting: true,	// if set to true, to receive test ads
+   //autoShow: boolean,	// if set to true, no need call showBanner or showInterstitial
+    adExtra: {
+    }
+   }
+	admobExport.setOptions = function(options, successCallback, failureCallback) {
+	  if(typeof options === 'object') {
+		  cordova.exec( successCallback, failureCallback, 'AdMob', 'setOptions', [options] );
+	  } else {
+		  if(typeof failureCallback === 'function') {
+			  failureCallback('options should be specified.');
+		  }
+	  }
+	};
   function Show(){
      AdMob.setOptions( defaultOptions );
      AdMob.createBanner( admobid.banner );
