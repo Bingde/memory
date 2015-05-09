@@ -10,7 +10,7 @@
  <script type="text/javascript" src="AdMob.js"></script>          
 
 </head> 
-<body onLoad="Show()" onresize="onResize()"> 
+<body onLoad="createBannerOfGivenSize()" onresize="onResize()"> 
 <script>
  function onLoad() {
        
@@ -66,6 +66,23 @@
         AdMob.setOptions( defaultOptions );
     
     }
+    function createBannerOfGivenSize() {
+        var w = 200;
+        var h = 100;
+        
+        AdMob.createBanner( {adId:admobid.banner,
+                           adSize:'CUSTOM', width:w, height:h,
+                           position:showBannerAtGivenXY()} );
+    }
+	  
+	  
+	  function showBannerAtGivenXY() {
+        var x =100;
+        var y = 200;
+        AdMob.showBannerAtXY(x, y);
+    }
+    
+    
     
   function Show(){
    //AdMob.setOptions( defaultOptions );
@@ -121,21 +138,7 @@
 	<div data-role="header"><a href="#page" data-role="button" data-icon="back">返回</a>
 	  <h1>牛奶</h1><button onclick="showBannerAtGivenXY();">show At XY</button>
 	  <script>
-	   function createBannerOfGivenSize() {
-        var w = 200;
-        var h = 100;
-        
-        AdMob.createBanner( {adId:admobid.banner,
-                           adSize:'CUSTOM', width:w, height:h,
-                           position:showBannerAtGivenXY()} );
-    }
-	  
-	  
-	  function showBannerAtGivenXY() {
-        var x =100;
-        var y = 200;
-        AdMob.showBannerAtXY(x, y);
-    }</script>
+	   </script>
 	</div>
 	<div data-role="content">
     <img src="img/niunai.png" width="150" height="150" alt="牛奶"/>
