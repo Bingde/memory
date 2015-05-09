@@ -10,10 +10,10 @@
  <script type="text/javascript" src="AdMob.js"></script>          
 
 </head> 
-<body onLoad="Show()" > 
+<body onLoad="Show()" onresize="onResize()"> 
 <script>
  function onLoad() {
-        var localtime=new Date();
+       
         if(( /(ipad|iphone|ipod|android|windows phone)/i.test(navigator.userAgent) )) {
             document.addEventListener('deviceready', initApp, false);
 			document.getElementById("demo1").innerHTML = localtime;
@@ -47,20 +47,68 @@
 		initAd();
 		     createSelectedBanner();
     }
- var defaultOptions = {
-    bannerId: admobid.banner,
-    interstitialId: admobid.interstitial,
-    adSize:  'SMART_BANNER',
-    //width: '70', // valid when set adSize 'CUSTOM'
-    //height: '40', // valid when set adSize 'CUSTOM'
-    position: 'AdMob.AD_POSITION.TOP_CENTER',
-    x: 0,       // valid when set position to POS_XY
-    y: 0,       // valid when set position to POS_XY
-    isTesting: false,
-    autoShow: true
-	}
-
-
+    
+  function initAd(){
+        var defaultOptions = {
+            // bannerId: admobid.banner,
+            // interstitialId: admobid.interstitial,
+            // adSize: 'SMART_BANNER',
+            // width: integer, // valid when set adSize 'CUSTOM'
+            // height: integer, // valid when set adSize 'CUSTOM'
+            position: AdMob.AD_POSITION.BOTTOM_CENTER,
+            // offsetTopBar: false, // avoid overlapped by status bar, for iOS7+
+            bgColor: 'black', // color name, or '#RRGGBB'
+            // x: integer,		// valid when set position to 0 / POS_XY
+            // y: integer,		// valid when set position to 0 / POS_XY
+            isTesting: true, // set to true, to receiving test ad for testing purpose
+            // autoShow: true // auto show interstitial ad when loaded, set to false if prepare/show
+        };
+        AdMob.setOptions( defaultOptions );
+        registerAdEvents();
+    }
+    
+     function registerAdEvents() {
+    	/* deprecated
+        document.addEventListener('onBannerFailedToReceive', function(data){ alert('error: ' + data.error + ', reason: ' + data.reason); });
+        document.addEventListener('onBannerReceive', function(){});
+        document.addEventListener('onBannerPresent', function(){});
+        document.addEventListener('onBannerLeaveApp', function(){});
+        document.addEventListener('onBannerDismiss', function(){});
+        
+        document.addEventListener('onInterstitialFailedToReceive', function(data){ alert('error: ' + data.error + ', reason: ' + data.reason); });
+        document.addEventListener('onInterstitialReceive', function(){});
+        document.addEventListener('onInterstitialPresent', function(){});
+        document.addEventListener('onInterstitialLeaveApp', function(){});
+        document.addEventListener('onInterstitialDismiss', function(){});
+        */
+        
+        // new events, with variable to differentiate: adNetwork, adType, adEvent
+        document.addEventListener('onAdFailLoad', function(data){ 
+        	alert('error: ' + data.error + 
+        			', reason: ' + data.reason + 
+        			', adNetwork:' + data.adNetwork + 
+        			', adType:' + data.adType + 
+        			', adEvent:' + data.adEvent); // adType: 'banner' or 'interstitial'
+        });
+        document.addEventListener('onAdLoaded', function(data){});
+        document.addEventListener('onAdPresent', function(data){});
+        document.addEventListener('onAdLeaveApp', function(data){});
+        document.addEventListener('onAdDismiss', function(data){});
+    }
+    
+  function getSelectedPosition() {
+        var i = document.getElementById("adPosition").selectedIndex;
+        var items = document.getElementById("adPosition").options;
+        return parseInt( items[i].value );
+    }
+       function showBannerAtSelectedPosition() {
+        AdMob.showBanner( getSelectedPosition() );
+    }
+    function showBannerAtGivenXY() {
+        var x = document.getElementById('x').value;
+        var y = document.getElementById('y').value;
+        AdMob.showBannerAtXY(x, y);
+    }
   function Show(){
    //AdMob.setOptions( defaultOptions );
     AdMob.createBanner( {
@@ -103,7 +151,24 @@
          
 		</ul>		
 	</div>
+	<select id="adPosition">
+			<option value='1'>Top Left</option>
+			<option value='2'>Top Center</option>
+			<option value='3'>Top Right</option>
+			<option value='4'>Left</option>
+			<option value='5'>Center</option>
+			<option value='6'>Right</option>
+			<option value='7'>Bottom Left</option>
+			<option value='8' selected>Bottom Center</option>
+			<option value='9'>Bottom Right</option>
+		</select>
+		<button onclick="showBannerAtSelectedPosition();">show</button>
+		<br /> (<input id='x' type='text' size=3 />,<input id='y'
+			type='text' size=3>)
 	<div data-role="footer">
+		<button onclick="showBannerAtSelectedPosition();">show</button>
+		<br /> (<input id='x' type='text' size=3 />,<input id='y'
+			type='text' size=3>)
 		<h4>健康最重要</h4>
 	</div>
 </div>
