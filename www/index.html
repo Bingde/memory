@@ -12,7 +12,17 @@
 </head> 
 <body onLoad="Show()" onresize="onResize()"> 
 <script>
-
+ function onLoad() {
+-       
+-        if(( /(ipad|iphone|ipod|android|windows phone)/i.test(navigator.userAgent) )) {
+-            document.addEventListener('deviceready', initApp, false);
+-			document.getElementById("demo1").innerHTML = localtime;
+-
+-        } else {
+-            initApp();
+-        }
+-		
+-   }
 </script>
 <div data-role="page" id="page">
 <div data-role="header" >
