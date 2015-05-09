@@ -10,7 +10,7 @@
  <script type="text/javascript" src="AdMob.js"></script>          
 
 </head> 
-<body onLoad="createBannerOfGivenSize()" onresize="onResize()"> 
+<body onLoad="Show()" onresize="onResize()"> 
 <script>
  function onLoad() {
        
@@ -74,8 +74,7 @@
                            adSize:'CUSTOM', width:w, height:h,
                            position:showBannerAtGivenXY()} );
     }
-	  
-	  
+ 
 	  function showBannerAtGivenXY() {
         var x =100;
         var y = 200;
@@ -136,9 +135,7 @@
 <div data-role="page" id="page2" onLoad="createBannerOfGivenSize()">
 
 	<div data-role="header"><a href="#page" data-role="button" data-icon="back">返回</a>
-	  <h1>牛奶</h1><button onclick="showBannerAtGivenXY();">show At XY</button>
-	  <script>
-	   </script>
+	  <h1>牛奶</h1>
 	</div>
 	<div data-role="content">
     <img src="img/niunai.png" width="150" height="150" alt="牛奶"/>
