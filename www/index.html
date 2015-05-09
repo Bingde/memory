@@ -73,7 +73,7 @@
     adId:admobid.banner, 
     adSize:'CUSTOM',  width:250, height:50, 
     overlap:false, 
-    position:AdMob.AD_POSITION.POS_XY, x:100, y:100, 
+    position:AdMob.AD_POSITION.TOP_CENTER, 
     autoShow:true} );
 	
   }
@@ -112,24 +112,7 @@
          
 		</ul>		
 	</div>
-	<select id="adPosition">
-			<option value='1'>Top Left</option>
-			<option value='2'>Top Center</option>
-			<option value='3'>Top Right</option>
-			<option value='4'>Left</option>
-			<option value='5'>Center</option>
-			<option value='6'>Right</option>
-			<option value='7'>Bottom Left</option>
-			<option value='8' selected>Bottom Center</option>
-			<option value='9'>Bottom Right</option>
-		</select>
-		<button onclick="showBannerAtSelectedPosition();">show</button>
-		<br /> <input id='x' type='text' size=3 />,<input id='y'
-			type='text' size=3>
-	<div data-role="footer">
-		<button onclick="showBannerAtSelectedPosition();">show</button>
-		<br /> <input id='x' type='text' size=3 />,<input id='y'
-			type='text' size=3>
+
 		<h4>健康最重要</h4>
 	</div>
 </div>
