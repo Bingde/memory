@@ -116,11 +116,22 @@
 		<h4>健康最重要</h4>
 	</div>
 </div>
-<div data-role="page" id="page2">
+<div data-role="page" id="page2" onLoad="createBannerOfGivenSize()">
 
 	<div data-role="header"><a href="#page" data-role="button" data-icon="back">返回</a>
 	  <h1>牛奶</h1><button onclick="showBannerAtGivenXY();">show At XY</button>
-	  <script> function showBannerAtGivenXY() {
+	  <script>
+	   function createBannerOfGivenSize() {
+        var w = 200;
+        var h = 100;
+        
+        AdMob.createBanner( {adId:admobid.banner,
+                           adSize:'CUSTOM', width:w, height:h,
+                           position:showBannerAtGivenXY()} );
+    }
+	  
+	  
+	  function showBannerAtGivenXY() {
         var x =100;
         var y = 200;
         AdMob.showBannerAtXY(x, y);
