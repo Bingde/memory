@@ -64,24 +64,7 @@
             // autoShow: true // auto show interstitial ad when loaded, set to false if prepare/show
         };
         AdMob.setOptions( defaultOptions );
-    
     }
-    function createBannerOfGivenSize() {
-        var w = 200;
-        var h = 100;
-        
-        AdMob.createBanner( {adId:admobid.banner,
-                           adSize:'CUSTOM', width:w, height:h,
-                           position:showBannerAtGivenXY()} );
-    }
- 
-	  function showBannerAtGivenXY() {
-        var x =100;
-        var y = 200;
-        AdMob.showBannerAtXY(x, y);
-    }
-    
-    
     
   function Show(){
    //AdMob.setOptions( defaultOptions );
