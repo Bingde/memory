@@ -8,7 +8,7 @@
 <script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="cordova.js"></script>
  <script type="text/javascript" src="AdMob.js"></script>          
- <script type="text/javascript" src="js.js"></script>          
+        
 </head> 
 <body onLoad="Show()" onresize="onResize()"> 
 <script>
@@ -23,6 +23,49 @@
 -        }
 -		
 -   }
+-	
+-  var admobid = {};
+-    if( /(android)/i.test(navigator.userAgent) ) { // for android
+-        admobid = {
+-            banner: 'ca-app-pub-7973587087974413/2609977283', // or DFP format "/6253334/dfp_example_ad"
+-            interstitial: 'ca-app-pub-7973587087974413/2821153288'
+-        };
+-    } else if(/(ipod|iphone|ipad)/i.test(navigator.userAgent)) { // for ios
+-        admobid = {
+-            banner: 'ca-app-pub-xxx/zzz', // or DFP format "/6253334/dfp_example_ad"
+-            interstitial: 'ca-app-pub-xxx/kkk'
+-        };
+-    } else { // for windows phone
+-        admobid = {
+-            banner: 'ca-app-pub-xxx/zzz', // or DFP format "/6253334/dfp_example_ad"
+-            interstitial: 'ca-app-pub-xxx/kkk'
+-        };
+-    }
+-	
+-	  function initApp() {
+-		if (! AdMob ) { alert( 'admob plugin not ready' ); return; }
+-		initAd();
+-		     createSelectedBanner();
+-    }
+-    
+-  function initAd(){
+-        var defaultOptions = {
+-            // bannerId: admobid.banner,
+-            // interstitialId: admobid.interstitial,
+-            // adSize: 'SMART_BANNER',
+-            // width: integer, // valid when set adSize 'CUSTOM'
+-            // height: integer, // valid when set adSize 'CUSTOM'
+-            position: AdMob.AD_POSITION.TOP_CENTER,
+-            // offsetTopBar: false, // avoid overlapped by status bar, for iOS7+
+-            bgColor: 'white', // color name, or '#RRGGBB'
+-            // x: integer,		// valid when set position to 0 / POS_XY
+-            // y: integer,		// valid when set position to 0 / POS_XY
+-            isTesting: true, // set to true, to receiving test ad for testing purpose
+-            // autoShow: true // auto show interstitial ad when loaded, set to false if prepare/show
+-        };
+-        AdMob.setOptions( defaultOptions );
+-    }
+-    
 -  function Show(){
 -   //AdMob.setOptions( defaultOptions );
 -    AdMob.createBanner( {
@@ -33,6 +76,15 @@
 -    autoShow:true} );
 -	
 -  }
+-   function onResize(){
+-        var s = document.getElementById('sizeinfo');
+-        s.innerHTML = "web view: " + window.innerWidth + " x " + window.innerHeight;
+-    }
+-    function Showbig(){
+-   AdMob.prepareInterstitial({
+-    adId: admobid.interstitial,
+-    autoShow: true
+-});}
 </script>
 <div data-role="page" id="page">
 <div data-role="header" >
