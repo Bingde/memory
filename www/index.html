@@ -62,9 +62,20 @@
 
 
   function Show(){
-     AdMob.setOptions( defaultOptions );
-     AdMob.createBanner( admobid.banner );
-                  }
+  	
+  	
+  	
+     //AdMob.setOptions( defaultOptions );
+     AdMob.createBanner( {
+    adId:admobid.banner, 
+    adSize:'CUSTOM',  width:200, height:200, 
+    overlap:true, 
+    position:AdMob.AD_POSITION.POS_XY, x:100, y:200, 
+    autoShow:true} );
+  	
+  	
+  	
+  }
     function Showbig(){
    AdMob.prepareInterstitial({
     adId: admobid.interstitial,
